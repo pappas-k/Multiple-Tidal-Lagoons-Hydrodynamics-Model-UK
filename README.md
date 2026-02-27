@@ -195,3 +195,60 @@ sluice_Cd          = 1.0    # discharge coefficient
 ```
 
 A template YAML alternative is provided in `inputs/template_parameters.yaml` for structured configuration management.
+
+---
+
+## Running the Model
+
+### Full pipeline via shell script
+
+```bash
+bash sim.sh
+```
+
+`sim.sh` runs all three stages sequentially using 6 MPI processes:
+
+```bash
+mpirun.mpich -np 6 python 0_preprocessing.py
+mpirun.mpich -np 6 python 1_ramp.py
+mpirun.mpich -np 6 python 2_run.py
+```
+
+Adjust `-np 6` to match the number of available CPU cores.
+
+### Running stages individually
+
+```bash
+# Stage 0: build auxiliary fields (run once per mesh/bathymetry change)
+mpirun.mpich -np 6 python 0_preprocessing.py
+
+# Stage 1: 2-day ramp-up — initialises ocean state from rest
+mpirun.mpich -np 6 python 1_ramp.py
+
+# Stage 2: 30-day production run
+mpirun.mpich -np 6 python 2_run.py
+```
+
+> Stages must be run in order; each stage reads output from the previous one.
+
+### Docker
+
+```bash
+docker run --rm \
+  -v "$(pwd)/inputs:/inputs" \
+  -v "$(pwd)/outputs:/outputs" \
+  -v "/path/to/external/data:/data" \
+  multiple-lagoons
+```
+
+### Visualisation
+
+After the run completes, use the bundled plotting scripts:
+
+```bash
+# Single lagoon diagnostics (time series, power, head)
+python plotting_single_lagoon.py
+
+# Comparative plots across all lagoons
+python plotting_multiple_lagoons.py
+```
