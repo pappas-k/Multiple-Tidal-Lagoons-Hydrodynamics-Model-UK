@@ -10,7 +10,7 @@ The Severn Estuary has one of the largest tidal ranges in the world (up to ~14 m
 
 While individual lagoon designs have been studied extensively, the **cumulative hydrodynamic impact** of deploying multiple lagoons simultaneously remains poorly understood. Modifying the tidal prism in one lagoon inevitably perturbs water levels and currents throughout the estuary, potentially affecting the performance of neighbouring lagoons and the broader coastal environment.
 
-This model addresses that gap by simulating up to **seven idealised TREC lagoons** in the West UK simultaneously, allowing researchers to:
+This model addresses that gap by simulating up to **seven idealised TPP lagoons** in the West UK simultaneously, allowing researchers to:
 
 - Quantify inter-lagoon hydrodynamic interactions.
 - Assess changes to tidal range, currents, and residual circulation.
