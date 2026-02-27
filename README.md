@@ -300,3 +300,49 @@ Each lagoon `<ID>` produces `lagoon_<ID>.h5` containing:
 | `Q_t` | m³ s⁻¹ | Turbine discharge |
 | `Q_s` | m³ s⁻¹ | Sluice discharge |
 | `mode` | — | Operational mode index (1–10) |
+
+---
+
+## Repository Structure
+
+```
+.
+├── 0_preprocessing.py           # Stage 0: build bathymetry, friction, sponge fields
+├── 1_ramp.py                    # Stage 1: 2-day spin-up simulation
+├── 2_run.py                     # Stage 2: 30-day production simulation
+├── plotting_single_lagoon.py    # Time series plots for a single lagoon
+├── plotting_multiple_lagoons.py # Comparative plots across all lagoons
+├── sim.sh                       # Shell script to run all three stages
+├── Dockerfile                   # Container definition (Firedrake base image)
+├── requirements.txt             # Additional Python dependencies
+├── inputs/
+│   ├── simulation_parameters.py   # Master configuration (edit this)
+│   ├── template_parameters.yaml   # Alternative YAML config template
+│   ├── useful_gauges_BODC.csv     # BODC tidal gauge coordinates
+│   ├── extra_detectors_TRS.npy    # Custom TRS detector coordinates
+│   ├── extra_detectors_TRS_names.npy
+│   ├── severn_outer_barrage.msh   # Severn estuary mesh
+│   ├── ambient_UK_mesh10000.msh   # Regional West UK mesh
+│   ├── lat.txt                    # Latitude reference data
+│   └── n_max_125.npy              # Manning coefficient field
+├── modules/
+│   ├── tools.py                   # LagoonCallback: per-timestep state updates
+│   ├── lagoon_operation.py        # Nine-mode operational state machine
+│   ├── input_barrages.py          # Lagoon initialisation and spec loading
+│   ├── parameterisations.py       # Turbine hill charts, sluice discharge formulae
+│   ├── input_0D.py                # 0D (box) model inputs
+│   └── optimisation_functions.py  # Optimisation utilities
+└── tools/
+    ├── bathymetry.py              # Bathymetry interpolation to mesh
+    ├── detectors.py               # BODC gauge and custom detector setup
+    ├── thetis_support_scripts.py  # Coriolis, field initialisation, state export
+    ├── tidal_forcing_ramp.py      # TPXO boundary condition updates
+    ├── harmonic_analysis.py       # M2/S2 amplitude/phase decomposition
+    ├── signal_processing.py       # Tidal signal reconstruction and range
+    ├── gauge_analysis.py          # Gauge validation utilities
+    ├── shear_stress.py            # Bed shear stress calculations
+    ├── peaks.py                   # High/low water peak detection
+    ├── tidal_amplitude.py         # Tidal amplitude calculations (parallel)
+    ├── tidal_amplitude_serial.py  # Tidal amplitude calculations (serial)
+    └── utm.py                     # UTM ↔ WGS84 coordinate conversion
+```
