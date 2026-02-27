@@ -353,7 +353,15 @@ Each lagoon `<ID>` produces `lagoon_<ID>.h5` containing:
 
 If you use this model in your research, please cite the reference publication:
 
-> Mackie, L. *et al.* (2021). Assessing impacts of tidal power lagoons of a consistent design. *Philosophical Transactions of the Royal Society A*, 379, 20200170. https://doi.org/10.1098/rsta.2020.0170
+> K Pappas, N.Q. Chien, I. Zilakos, L Beevers, A. Angeloudis, 2024. On
+the economic feasibility of tidal range power plants. Proceedings of the
+Royal Society A: Mathematical, Physical and Engineering Sciences. doi:
+10.1098/rspa.2023.0867
+
+> L. Mackie, S. C. Kramer, M. D. Piggott, and A. Angeloudis. Assessing impacts of tidal power lagoons of a consistent design. Ocean Engineering, 240:
+109879, 2021b. ISSN 0029-8018. doi: https://doi.org/10.1016/j.oceaneng.
+2021.109879. URL https://www.sciencedirect.com/science/article/pii/
+S0029801821012282.
 
 ---
 
