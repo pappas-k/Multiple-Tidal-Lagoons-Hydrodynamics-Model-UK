@@ -359,7 +359,8 @@ Royal Society A: Mathematical, Physical and Engineering Sciences. doi:
 https://10.1098/rspa.2023.0867
 
 > L. Mackie, S. C. Kramer, M. D. Piggott, and A. Angeloudis. Assessing impacts of tidal power lagoons of a consistent design. Ocean Engineering, 240:
-109879, 2021. ISSN 0029-8018. doi:https://doi.org/10.1016/j.oceaneng.
+109879, 2021. ISSN 0029-8018. doi: {https://doi.org/10.1016/j.oceaneng.2021.109879},
+url: {https://www.sciencedirect.com/science/article/pii/S0029801821012282},
 
 
 ---
