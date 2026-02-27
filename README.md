@@ -252,3 +252,51 @@ python plotting_single_lagoon.py
 # Comparative plots across all lagoons
 python plotting_multiple_lagoons.py
 ```
+
+---
+
+## Outputs
+
+Outputs are written to `outputs/` and subdivided by pipeline stage.
+
+### Preprocessed fields (`outputs/outputs_preproc/`)
+
+| File | Description |
+|---|---|
+| `bathymetry2D.h5` | Interpolated bathymetry projected onto the mesh |
+| `lat_field.h5` | Lowest Astronomical Tide correction field |
+| `manning.h5` | Spatially varying Manning friction field |
+| `viscosity_sponge.h5` | Near-boundary viscosity damping layer |
+
+### Ramp-up outputs (`outputs/outputs_ramp/`)
+
+HDF5 checkpoints of elevation and velocity fields at the end of the 2-day spin-up, used to initialise the main run.
+
+### Main run outputs (`outputs/outputs_run/`)
+
+**Field snapshots** (every 10 000 s ≈ 2.78 h):
+
+| Variable | Description |
+|---|---|
+| `elev_2d` | Free-surface elevation (m) |
+| `uv_2d` | Depth-averaged horizontal velocity (m s⁻¹) |
+
+**Detector time series** (every timestep, 100 s):
+
+- Tidal elevation at all BODC gauge locations and custom TRS detectors, stored as HDF5 datasets.
+
+**Per-lagoon diagnostics** (every timestep):
+
+Each lagoon `<ID>` produces `lagoon_<ID>.h5` containing:
+
+| Variable | Unit | Description |
+|---|---|---|
+| `t` | s | Simulation time |
+| `h_o` | m | Area-averaged outer (seaward) water level |
+| `h_i` | m | Area-averaged inner (impoundment) water level |
+| `DZ` | m | Head difference (h_o − h_i or h_i − h_o) |
+| `P` | MW | Instantaneous power output |
+| `E` | MWh | Cumulative energy generated |
+| `Q_t` | m³ s⁻¹ | Turbine discharge |
+| `Q_s` | m³ s⁻¹ | Sluice discharge |
+| `mode` | — | Operational mode index (1–10) |
