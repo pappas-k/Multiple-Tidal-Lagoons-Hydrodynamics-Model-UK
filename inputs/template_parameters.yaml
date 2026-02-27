@@ -1,0 +1,47 @@
+# Geometry and mesh
+depth: 50
+manning: 0.03
+meshfile: 
+utm_zone: 30
+utm_band: U
+bnd_land: 2
+bnd_open: [4, 5, 6]
+
+# Tide
+amplitude: 2.0
+period_M2: 12.42 * 3600
+t_ref: 10000.
+eta0: 0.0
+u0: 0.001
+v0: 0.0
+
+# Physics
+friction_data: n_max_125.npy
+use_friction_data: True
+grav_acc: 9.807
+density: 1025
+
+# Numerics
+L_eik: 1000
+
+# Simulation
+timestep: 200
+t_export: 1000.0
+t_end: 20 * 12.42 * 3600
+start_time: datetime(2017, 7, 30, 0, 0)
+
+# Detectors and gauging
+tidegauge_file: 'inputs/useful_gauges.csv'
+elevation_detectors: []
+additional_detector_files: ['inputs/extra_detectors']
+max_dist: 5000
+detector_paths:
+  - ((0, 10_000/2), (180_000-0.001, 10_000/2), 21) 
+  - ((0, 10_000/50), (180_000-0.001, 10_000/50), 5) 
+
+detector_arrays:
+  - (3, 3, 2000, 2000, 180_000/2, 10_000/2, 45)
+
+# Outputs:
+ramp_output_folder: 'outputs/outputs_ramp'
+run_output_folder: 'outputs/outputs_run'
