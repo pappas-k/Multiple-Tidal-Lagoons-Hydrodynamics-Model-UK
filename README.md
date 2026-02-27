@@ -18,3 +18,44 @@ This model addresses that gap by simulating up to **seven idealised TREC lagoons
 - Inform policy decisions on consenting multiple tidal range projects.
 
 The work follows the consistent design approach described in Mackie *et al.* — *"Assessing impacts of tidal power lagoons of a consistent design"* — where each lagoon is parameterised identically to isolate location-dependent effects.
+
+---
+
+## Model Architecture
+
+### Governing equations
+
+The model solves the **2D depth-averaged shallow water equations** (SWE) using the [Thetis](https://thetisproject.org/) finite element solver, which is built on [Firedrake](https://www.firedrakeproject.org/). The time integration uses a Crank-Nicolson semi-implicit scheme (timestep Δt = 100 s) that is numerically stable for long tidal simulations without excessive diffusion.
+
+Physical processes included:
+
+| Process | Implementation |
+|---|---|
+| Bottom friction | Manning formulation (*n* = 0.03 s m⁻¹/³; spatially varying) |
+| Tidal forcing | 8 constituents from TPXO (Q1, O1, P1, K1, N2, M2, S2, K2) |
+| Coriolis | Constant-latitude *f*-plane (53 °N) |
+| Wetting/drying | Enabled (α = 1.5, minimum depth = −10 m) |
+| Viscosity sponge | Applied near open boundaries to absorb outgoing waves |
+
+### Three-stage pipeline
+
+```
+0_preprocessing.py  →  1_ramp.py  →  2_run.py
+```
+
+| Stage | Duration | Purpose |
+|---|---|---|
+| **Preprocessing** | once | Build auxiliary fields: bathymetry, LAT, Manning friction, viscosity sponge |
+| **Ramp-up** | 2 days | Spin up the model from rest; tidal forcing applied with a smooth ramp function |
+| **Main simulation** | 30 days | Full operational run; lagoon turbines and sluices active |
+
+### Lagoon operation state machine
+
+Each lagoon is governed by a nine-mode state machine (`modules/lagoon_operation.py`):
+
+- **Holding** — impoundment water level is allowed to build or drain.
+- **Generating** — turbines operate when the head difference exceeds the minimum operating threshold (1 m).
+- **Sluicing** — sluice gates open to equalise water levels.
+- **Pumping** — turbines run in reverse to increase head before a generation phase.
+
+Operational mode selection at each timestep depends on the instantaneous inner/outer water level difference (ΔZ) and the current operational phase (ebb or flood). A smooth ramp function prevents abrupt flow changes that could destabilise the finite element solver.
