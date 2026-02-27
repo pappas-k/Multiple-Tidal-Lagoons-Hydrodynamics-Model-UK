@@ -1,3 +1,3 @@
-# Multiple Lagoons Thetis Model
+# Multiple Tidal Lagoons Hydrodynamics Model — UK
 
-The Multiple Lagoons Thetis Model is a modified version of the West-UK-tidal-model. It has been adapted to simulate and study the effects and behavior of multiple idealised lagoons in the west part of the UK (as Mackie in 'Assessing impacts of tidal power lagoons of a consistent design). 
+A 2D hydrodynamic model for simulating multiple idealised tidal range energy conversion (TREC) lagoons in the Severn Estuary and wider West UK coastal region, built on the [Thetis](https://thetisproject.org/) finite element ocean model.
