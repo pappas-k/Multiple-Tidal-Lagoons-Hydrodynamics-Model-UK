@@ -59,3 +59,40 @@ Each lagoon is governed by a nine-mode state machine (`modules/lagoon_operation.
 - **Pumping** — turbines run in reverse to increase head before a generation phase.
 
 Operational mode selection at each timestep depends on the instantaneous inner/outer water level difference (ΔZ) and the current operational phase (ebb or flood). A smooth ramp function prevents abrupt flow changes that could destabilise the finite element solver.
+
+---
+
+## Installation
+
+### Recommended: Docker (simplest)
+
+The project ships with a `Dockerfile` based on the official Firedrake image, which bundles Thetis, Firedrake, PETSc, and MPICH. No manual dependency installation is required.
+
+```bash
+# Build the image
+docker build -t multiple-lagoons .
+
+# Run the full simulation pipeline (outputs written to ./model_data)
+docker run --rm -v "$(pwd)/model_data:/model_data" multiple-lagoons
+```
+
+### Manual installation
+
+If you prefer to run outside Docker, you need:
+
+1. **Firedrake** (includes PETSc, MPICH, UFL): follow the [Firedrake installation guide](https://www.firedrakeproject.org/download.html).
+2. **Thetis**: install inside the Firedrake virtual environment:
+   ```bash
+   source firedrake/bin/activate
+   pip install git+https://github.com/thetisproject/thetis.git
+   ```
+3. **Python dependencies** listed in `requirements.txt`:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. **UPTide** for tidal constituent predictions:
+   ```bash
+   pip install uptide
+   ```
+
+> **Note:** Firedrake must be activated before running any model scripts. All MPI-parallel execution uses `mpirun.mpich`.
