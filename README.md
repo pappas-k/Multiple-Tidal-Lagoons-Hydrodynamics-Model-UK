@@ -346,3 +346,33 @@ Each lagoon `<ID>` produces `lagoon_<ID>.h5` containing:
     ├── tidal_amplitude_serial.py  # Tidal amplitude calculations (serial)
     └── utm.py                     # UTM ↔ WGS84 coordinate conversion
 ```
+
+---
+
+## Citation
+
+If you use this model in your research, please cite the reference publication:
+
+> Mackie, L. *et al.* (2021). Assessing impacts of tidal power lagoons of a consistent design. *Philosophical Transactions of the Royal Society A*, 379, 20200170. https://doi.org/10.1098/rsta.2020.0170
+
+---
+
+## References
+
+- **TPXO tidal atlas**: Egbert, G.D. & Erofeeva, S.Y. (2002). Efficient inverse modeling of barotropic ocean tides. *Journal of Atmospheric and Oceanic Technology*, 19(2), 183–204.
+- **Firedrake**: Rathgeber, F. *et al.* (2016). Firedrake: automating the finite element method by composing abstractions. *ACM Transactions on Mathematical Software*, 43(3), 24.
+- **Thetis**: https://thetisproject.org/
+- **BODC gauge data**: https://www.bodc.ac.uk/
+- **GEBCO bathymetry**: https://www.gebco.net/
+
+---
+
+## Acknowledgements
+
+This model was developed as part of PhD research at Cardiff University. The Thetis ocean model and Firedrake finite element framework are developed and maintained by their respective open-source communities. Bathymetry data were obtained from Ordnance Survey via Digimap and from the General Bathymetric Chart of the Oceans (GEBCO). Tidal constituent data are from the TPXO global tidal model (Oregon State University).
+
+---
+
+## Licence
+
+This project is released for research use. Please contact the repository owner regarding any commercial applications.
