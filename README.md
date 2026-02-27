@@ -96,3 +96,52 @@ If you prefer to run outside Docker, you need:
    ```
 
 > **Note:** Firedrake must be activated before running any model scripts. All MPI-parallel execution uses `mpirun.mpich`.
+
+---
+
+## Input Data
+
+Several large external datasets are required before running the model. These are **not included** in the repository due to size or licensing constraints, and must be obtained separately.
+
+### Mesh files (provided in `inputs/`)
+
+| File | Size | Description |
+|---|---|---|
+| `severn_outer_barrage.msh` | 5.6 MB | High-resolution Gmsh mesh of the Severn Estuary with lagoon boundaries |
+| `ambient_UK_mesh10000.msh` | 2.0 MB | Coarser regional mesh covering the wider West UK shelf |
+
+The mesh to use is selected in `inputs/simulation_parameters.py` via the `mesh_file` variable.
+
+### Bathymetry (external — download separately)
+
+| Dataset | Resolution | Usage |
+|---|---|---|
+| [DigiMap West UK](https://digimap.edina.ac.uk/) | 1 arc-second | Primary bathymetry source (high resolution) |
+| [GEBCO](https://www.gebco.net/) | 15 arc-second | Fallback for areas outside DigiMap coverage |
+
+Set the paths to these NetCDF files in `inputs/simulation_parameters.py`:
+
+```python
+bathymetry_paths = ["/path/to/digimap_west_uk.nc",
+                    "/path/to/gebco_global.nc"]
+```
+
+### Tidal forcing (external — TPXO)
+
+The model uses [TPXO](https://www.tpxo.net/) tidal constituent data. Request access from OSU and download:
+
+- `gridES2008.nc` — TPXO grid file
+- `hf.ES2008.nc` — tidal harmonic constants
+
+Update the forcing paths in `inputs/simulation_parameters.py`:
+
+```python
+tpxo_grid = "/path/to/gridES2008.nc"
+tpxo_data = "/path/to/hf.ES2008.nc"
+```
+
+Eight tidal constituents are extracted: **Q1, O1, P1, K1, N2, M2, S2, K2**.
+
+### Gauge data (included)
+
+`inputs/useful_gauges_BODC.csv` — 60+ British Oceanographic Data Centre (BODC) tidal gauge locations used as model validation points and in-model detectors.
