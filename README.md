@@ -145,3 +145,53 @@ Eight tidal constituents are extracted: **Q1, O1, P1, K1, N2, M2, S2, K2**.
 ### Gauge data (included)
 
 `inputs/useful_gauges_BODC.csv` — 60+ British Oceanographic Data Centre (BODC) tidal gauge locations used as model validation points and in-model detectors.
+
+---
+
+## Configuration
+
+All simulation settings are controlled from a single file: **`inputs/simulation_parameters.py`**.
+
+### Key parameters
+
+| Parameter | Default | Description |
+|---|---|---|
+| `mesh_file` | `west_uk_multiple_lagoons.msh` | Gmsh mesh to use |
+| `dt` | `100` s | Model timestep |
+| `ramp_time` | `2` days | Spin-up duration |
+| `run_time` | `30` days | Main simulation duration |
+| `n_manning` | `0.03` | Uniform Manning coefficient (overridden by spatially varying field) |
+| `lat` | `53.0` °N | Latitude for Coriolis *f*-plane |
+| `operation_mode` | `"two-way"` | Lagoon operation: `"ebb"`, `"ebb-pump"`, `"two-way"`, `"two-way-pump"` |
+| `n_turbines` | `30` | Number of turbines per lagoon |
+| `n_sluices` | `15` | Number of sluice gates per lagoon |
+| `h_min` | `1.0` m | Minimum head for turbine generation |
+| `rho` | `1025` kg m⁻³ | Seawater density |
+
+### Lagoon identifiers
+
+Seven lagoon sites are defined by their mesh boundary IDs:
+
+| ID | Label | Location |
+|---|---|---|
+| 1 | SW | South Wales |
+| 2 | CA | Cardiff |
+| 3 | WA | Weston-super-Mare Area |
+| 4 | CO | Colwyn Bay |
+| 5 | LI | Liverpool |
+| 6 | BL | Blackpool |
+| 7 | SO | Solway Firth |
+
+To run a subset of lagoons, comment out the unwanted entries in the `lagoon_ids` list.
+
+### Turbine specification
+
+```python
+turbine_diameter   = 7.35   # m
+turbine_capacity   = 20     # MW (per turbine)
+turbine_efficiency = [0.95, 0.95]   # [generating, pumping]
+sluice_area        = 100    # m² (total per lagoon)
+sluice_Cd          = 1.0    # discharge coefficient
+```
+
+A template YAML alternative is provided in `inputs/template_parameters.yaml` for structured configuration management.
