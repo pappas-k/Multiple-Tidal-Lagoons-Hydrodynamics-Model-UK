@@ -64,21 +64,7 @@ Operational mode selection at each timestep depends on the instantaneous inner/o
 
 ## Installation
 
-### Recommended: Docker (simplest)
-
-The project ships with a `Dockerfile` based on the official Firedrake image, which bundles Thetis, Firedrake, PETSc, and MPICH. No manual dependency installation is required.
-
-```bash
-# Build the image
-docker build -t multiple-lagoons .
-
-# Run the full simulation pipeline (outputs written to ./model_data)
-docker run --rm -v "$(pwd)/model_data:/model_data" multiple-lagoons
-```
-
-### Manual installation
-
-If you prefer to run outside Docker, you need:
+You need:
 
 1. **Firedrake** (includes PETSc, MPICH, UFL): follow the [Firedrake installation guide](https://www.firedrakeproject.org/download.html).
 2. **Thetis**: install inside the Firedrake virtual environment:
@@ -231,16 +217,6 @@ mpirun.mpich -np 6 python 2_run.py
 
 > Stages must be run in order; each stage reads output from the previous one.
 
-### Docker
-
-```bash
-docker run --rm \
-  -v "$(pwd)/inputs:/inputs" \
-  -v "$(pwd)/outputs:/outputs" \
-  -v "/path/to/external/data:/data" \
-  multiple-lagoons
-```
-
 ### Visualisation
 
 After the run completes, use the bundled plotting scripts:
@@ -313,7 +289,6 @@ Each lagoon `<ID>` produces `lagoon_<ID>.h5` containing:
 ├── plotting_single_lagoon.py    # Time series plots for a single lagoon
 ├── plotting_multiple_lagoons.py # Comparative plots across all lagoons
 ├── sim.sh                       # Shell script to run all three stages
-├── Dockerfile                   # Container definition (Firedrake base image)
 ├── requirements.txt             # Additional Python dependencies
 ├── inputs/
 │   ├── simulation_parameters.py   # Master configuration (edit this)
