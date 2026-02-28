@@ -352,7 +352,7 @@ url: https://www.sciencedirect.com/science/article/pii/S0029801821012282,
 
 ## Acknowledgements
 
-This model was developed as part of PhD research at Cardiff University. The Thetis ocean model and Firedrake finite element framework are developed and maintained by their respective open-source communities. Bathymetry data were obtained from Ordnance Survey via Digimap and from the General Bathymetric Chart of the Oceans (GEBCO). Tidal constituent data are from the TPXO global tidal model (Oregon State University).
+This model was developed as part of PhD research at the University of Edinburgh. The Thetis ocean model and Firedrake finite element framework are developed and maintained by their respective open-source communities. Bathymetry data were obtained from Ordnance Survey via Digimap and from the General Bathymetric Chart of the Oceans (GEBCO). Tidal constituent data are from the TPXO global tidal model.
 
 ---
 
