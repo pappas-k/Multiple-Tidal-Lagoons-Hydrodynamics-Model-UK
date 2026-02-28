@@ -6,7 +6,7 @@ A 2D hydrodynamic model for simulating multiple idealised tidal range power plan
 
 ## Scientific Background
 
-The Severn Estuary has one of the largest tidal ranges in the world (up to ~14 m at spring tide), making it a prime candidate for tidal range energy extraction. Tidal lagoons — partially enclosed coastal impoundments fitted with low-head hydro turbines — can exploit this resource by generating electricity during both the ebb and flood phases of the tide.
+The UK has one of the largest tidal ranges in the world (up to ~14 m at spring tide at the Severn Estuary), making it a prime candidate for tidal range energy extraction. Tidal lagoons — partially enclosed coastal impoundments fitted with low-head hydro turbines — can exploit this resource by generating electricity during both the ebb and flood phases of the tide.
 
 While individual lagoon designs have been studied extensively, the **cumulative hydrodynamic impact** of deploying multiple lagoons simultaneously remains poorly understood. Modifying the tidal prism in one lagoon inevitably perturbs water levels and currents throughout the estuary, potentially affecting the performance of neighbouring lagoons and the broader coastal environment.
 
